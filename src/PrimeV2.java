@@ -4,26 +4,26 @@ import java.util.Comparator;
 public class PrimeV2 {
     public ArrayList<Integer> primes = new ArrayList<>();
 
-    public static void main(String args[]) {
+    public static void main(String args[]) throws InterruptedException {
         PrimeV1 p1 = new PrimeV1();
         PrimeV2 p2 = new PrimeV2();
-        System.out.println(p1.benchmarkTo(500000));
-        System.out.println(p2.benchmarkTo(500000));
-        ArrayList<Integer> r1 = p1.generatePrimeTo(1000);
-        ArrayList<Integer> r2 = p2.generatePrimeTo(1000);
+        System.out.println(p1.benchmarkTo(50000));
+        System.out.println(p2.benchmarkTo(50000));
+        ArrayList<Integer> r1 = p1.generatePrimeTo(100000);
+        ArrayList<Integer> r2 = p2.generatePrimeTo(100000);
         System.out.println(r1);
         System.out.println(r2);
         System.out.println(r1.equals(r2));
     }
 
-    public String benchmarkTo(int i) {
+    public String benchmarkTo(int i) throws InterruptedException {
         Long t1 = System.currentTimeMillis();
         System.out.println(generatePrimeTo(i));
         Long t2 = System.currentTimeMillis();
         return t2-t1 + "ms";
     }
 
-    public ArrayList<Integer> generatePrimeTo(int n) {
+    public ArrayList<Integer> generatePrimeTo(int n) throws InterruptedException {
         primes.clear();
         if(n<2) {
             return primes;
@@ -35,8 +35,16 @@ public class PrimeV2 {
             Thread t = new Thread(new isPrime(this,i));
             t.start();
         }
-        while (Thread.currentThread().getThreadGroup().activeCount() > 2) {}
-        primes.sort(Comparator.naturalOrder());
+        while (Thread.currentThread().getThreadGroup().activeCount() > 2) {
+        }
+        Thread.sleep(n/100);
+        try {
+            primes.sort(Comparator.naturalOrder());
+        }
+        catch (NullPointerException e) {
+            System.out.println("It fucked up, trying again");
+            this.generatePrimeTo(n);
+        }
         return primes;
     }
 

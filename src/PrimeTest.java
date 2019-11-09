@@ -1,5 +1,4 @@
 import org.junit.Test;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -32,22 +31,17 @@ public class PrimeTest {
     }
 
     @Test
-    public void reliabilityTest() throws InterruptedException {
-        for (int i=0 ; i<20 ; i++) {
-            assertEquals(primeTo1kV2(),getPrimesFromFile().subList(0,168));
-        }
-    }
-
-    public ArrayList<Integer> primeTo1kV2() throws InterruptedException {
+    public void reliabilityTestV2() {
         PrimeV2 p2 = new PrimeV2();
         ArrayList<Integer> r;
 
-        r = p2.generatePrimeTo(1000);
-        return r;
+        for (int i=0 ; i<20 ; i++) {
+            assertEquals(p2.generatePrimeTo(1000),getPrimesFromFile().subList(0,168));
+        }
     }
 
     @Test
-    public void testPrimeTo10kV2() throws InterruptedException {
+    public void testPrimeTo10kV2() {
         PrimeV2 p2 = new PrimeV2();
         ArrayList<Integer> r;
 
@@ -56,7 +50,7 @@ public class PrimeTest {
     }
 
     @Test
-    public void testPrimeTo100kV2() throws InterruptedException {
+    public void testPrimeTo100kV2() {
         PrimeV2 p2 = new PrimeV2();
         ArrayList<Integer> r;
 
@@ -65,7 +59,7 @@ public class PrimeTest {
     }
 
     @Test
-    public void testPrimeTo1000kV2() throws InterruptedException {
+    public void testPrimeTo1000kV2() {
         PrimeV2 p2 = new PrimeV2();
         ArrayList<Integer> r;
 

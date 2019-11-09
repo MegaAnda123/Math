@@ -1,30 +1,21 @@
 import java.util.ArrayList;
-import java.util.Comparator;
 
 public class PrimeV2 {
     public ArrayList<Integer> primes = new ArrayList<>();
+    public boolean[] primesBool;
 
-    public static void main(String args[]) throws InterruptedException {
-        PrimeV1 p1 = new PrimeV1();
-        PrimeV2 p2 = new PrimeV2();
-        System.out.println(p1.benchmarkTo(50000));
-        System.out.println(p2.benchmarkTo(50000));
-        ArrayList<Integer> r1 = p1.generatePrimeTo(100000);
-        ArrayList<Integer> r2 = p2.generatePrimeTo(100000);
-        System.out.println(r1);
-        System.out.println(r2);
-        System.out.println(r1.equals(r2));
-    }
-
-    public String benchmarkTo(int i) throws InterruptedException {
+    public String benchmarkTo(int i) {
         Long t1 = System.currentTimeMillis();
         System.out.println(generatePrimeTo(i));
         Long t2 = System.currentTimeMillis();
         return t2-t1 + "ms";
     }
 
-    public ArrayList<Integer> generatePrimeTo(int n) throws InterruptedException {
+    public ArrayList<Integer> generatePrimeTo(int n) {
         primes.clear();
+
+        primesBool = new boolean[n+1];
+
         if(n<2) {
             return primes;
         }
@@ -37,13 +28,10 @@ public class PrimeV2 {
         }
         while (Thread.currentThread().getThreadGroup().activeCount() > 2) {
         }
-        Thread.sleep(n/100);
-        try {
-            primes.sort(Comparator.naturalOrder());
-        }
-        catch (NullPointerException e) {
-            System.out.println("It fucked up, trying again");
-            this.generatePrimeTo(n);
+        for(int i = 0; i<=n ; i++) {
+            if(primesBool[i]) {
+                primes.add(i);
+            }
         }
         return primes;
     }
@@ -65,9 +53,7 @@ public class PrimeV2 {
                     break;
                 }
             }
-            if(isPrime) {
-                p.primes.add(n);
-            }
+            p.primesBool[n] = isPrime;
         }
     }
 }

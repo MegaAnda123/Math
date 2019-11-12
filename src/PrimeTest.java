@@ -4,7 +4,7 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class PrimeTest {
 
@@ -12,13 +12,13 @@ public class PrimeTest {
     public void testIsPrimeV1() {
         PrimeV1 p1 = new PrimeV1();
 
-        assertEquals(p1.isPrime(-1),false);
-        assertEquals(p1.isPrime(0),false);
-        assertEquals(p1.isPrime(1),false);
-        assertEquals(p1.isPrime(2),true);
-        assertEquals(p1.isPrime(3),true);
-        assertEquals(p1.isPrime(4),false);
-        assertEquals(p1.isPrime(5),true);
+        assertFalse(p1.isPrime(-1));
+        assertFalse(p1.isPrime(0));
+        assertFalse(p1.isPrime(1));
+        assertTrue(p1.isPrime(2));
+        assertTrue(p1.isPrime(3));
+        assertFalse(p1.isPrime(4));
+        assertTrue(p1.isPrime(5));
     }
 
     @Test
@@ -27,7 +27,7 @@ public class PrimeTest {
         ArrayList<Integer> r;
 
         r = p1.generatePrimeTo(100000);
-        assertEquals(r,getPrimesFromFile().subList(0,r.size()));
+        assertEquals(getPrimesFromFile().subList(0,r.size()),r);
     }
 
     @Test
@@ -36,7 +36,7 @@ public class PrimeTest {
         ArrayList<Integer> r;
 
         for (int i=0 ; i<20 ; i++) {
-            assertEquals(p2.generatePrimeTo(1000),getPrimesFromFile().subList(0,168));
+            assertEquals(getPrimesFromFile().subList(0,168),p2.generatePrimeTo(1000));
         }
     }
 
@@ -46,7 +46,7 @@ public class PrimeTest {
         ArrayList<Integer> r;
 
         r = p2.generatePrimeTo(10000);
-        assertEquals(r,getPrimesFromFile().subList(0,r.size()));
+        assertEquals(getPrimesFromFile().subList(0,r.size()),r);
     }
 
     @Test
@@ -55,7 +55,7 @@ public class PrimeTest {
         ArrayList<Integer> r;
 
         r = p2.generatePrimeTo(100000);
-        assertEquals(r,getPrimesFromFile().subList(0,r.size()));
+        assertEquals(getPrimesFromFile().subList(0,r.size()),r);
     }
 
     @Test
@@ -65,7 +65,7 @@ public class PrimeTest {
 
         r = p2.generatePrimeTo(1000000);
         r.sort(Comparator.naturalOrder());
-        assertEquals(r,getPrimesFromFile().subList(0,r.size()));
+        assertEquals(getPrimesFromFile().subList(0,r.size()),r);
     }
 
 

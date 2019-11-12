@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="JCuda">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/JCuda" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/JCuda" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/JCuda" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/JCuda" recursive="false" type="SOURCES" />
+  </library>
+</component>

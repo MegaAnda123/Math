@@ -19,15 +19,12 @@ public class PrimeV2 {
         if(n<2) {
             return primes;
         }
-        if(n>1) {
             primes.add(2);
-        }
         for (int i = 3; i<=n; i+=2) {
             Thread t = new Thread(new isPrime(this,i));
             t.start();
         }
-        while (Thread.currentThread().getThreadGroup().activeCount() > 2) {
-        }
+        while (Thread.currentThread().getThreadGroup().activeCount() > 2) {}
         for(int i = 0; i<=n ; i++) {
             if(primesBool[i]) {
                 primes.add(i);
